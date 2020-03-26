@@ -62,9 +62,9 @@ File a bug
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from debug_toolbar.panels import DebugPanel
+from debug_toolbar.panels import Panel
 
-class UserPanel(DebugPanel):
+class UserPanel(Panel):
     """
     Panel that allows you to login as other recently-logged in users.
     """
@@ -94,3 +94,7 @@ class UserPanel(DebugPanel):
 
     def process_response(self, request, response):
         self.request = request
+    
+    def process_request(self, request):
+        self.request = request
+        return super().process_request(request)
